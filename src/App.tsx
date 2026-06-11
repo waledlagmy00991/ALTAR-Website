@@ -35,16 +35,57 @@ import {
 function Logo() {
   return (
     <svg 
-      width="18" 
-      height="18" 
-      viewBox="0 0 256 256" 
+      viewBox="0 0 100 100" 
       fill="none" 
-      xmlns="http://www.w3.org/2056/svg"
-      className="transition-transform duration-300 hover:scale-110"
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-7 h-7 sm:w-8 sm:h-8 transition-transform duration-300 hover:scale-110"
     >
+      {/* 1. Top Pavilion / Temple structure */}
       <path 
-        fill="rgb(84, 84, 84)" 
-        d="M 160 88 L 194 34 L 216 0 L 256 0 L 256 40 L 221.5 93.5 L 200 128 L 256 128 L 256 256 L 96 256 L 96 168 L 64.246 220 L 40 256 L 0 256 L 0 216 L 34 162 L 56 128 L 0 128 L 0 0 L 160 0 Z" 
+        d="M 38 28 L 38 23 L 50 14 L 62 23 L 62 28" 
+        stroke="#124470" 
+        strokeWidth="5.5" 
+        strokeLinecap="round"
+        strokeLinejoin="round" 
+      />
+      {/* Three vertical columns */}
+      <line x1="43" y1="23.5" x2="43" y2="33" stroke="#124470" strokeWidth="5.5" strokeLinecap="round" />
+      <line x1="57" y1="23.5" x2="57" y2="33" stroke="#124470" strokeWidth="5.5" strokeLinecap="round" />
+      <line x1="50" y1="17.5" x2="50" y2="33" stroke="#124470" strokeWidth="5.5" strokeLinecap="round" />
+
+      {/* 2. Middle AR Goggles */}
+      <path 
+        d="M 25 43.5 L 75 43.5 C 77.5 43.5 77.5 46.5 77.5 49 C 77.5 56.5 68.5 56.5 61 56.5 C 57.5 56.5 55.5 50 50 50 C 44.5 50 42.5 56.5 39 56.5 C 31.5 56.5 22.5 56.5 22.5 49 C 22.5 46.5 22.5 43.5 25 43.5 Z" 
+        stroke="#124470" 
+        strokeWidth="5.5" 
+        strokeLinejoin="round" 
+        strokeLinecap="round"
+        fill="none"
+      />
+      {/* Small Orange dash inside goggles (right side) */}
+      <line 
+        x1="62" 
+        y1="48" 
+        x2="71" 
+        y2="48" 
+        stroke="#ED9529" 
+        strokeWidth="3.5" 
+        strokeLinecap="round" 
+      />
+
+      {/* 3. Bottom Legs */}
+      <line x1="36" y1="63" x2="31.5" y2="74" stroke="#124470" strokeWidth="5.5" strokeLinecap="round" />
+      <line x1="64" y1="63" x2="68.5" y2="74" stroke="#124470" strokeWidth="5.5" strokeLinecap="round" />
+      
+      {/* Bottom Left Orange Bar */}
+      <line 
+        x1="26.5" 
+        y1="74" 
+        x2="48" 
+        y2="74" 
+        stroke="#ED9529" 
+        strokeWidth="5.5" 
+        strokeLinecap="round" 
       />
     </svg>
   );
@@ -488,21 +529,25 @@ export default function App() {
   ];
 
   return (
-    <div id="root-container" className="relative min-h-screen overflow-hidden bg-[#f0f0ee] select-none text-slate-800">
+    <div id="root-container" className="relative min-h-screen overflow-hidden bg-[#fafafa] select-none text-slate-850 font-sans">
       
       {/* BACKGROUND VIDEO ELEMENT - Visually identical looping source */}
-      <video
-        id="hero-bg-video"
-        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_215831_c6a8989c-d716-4d8d-8745-e972a2eec711.mp4"
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0"
-      />
+      {activeLink === 'Home' && (
+        <video
+          id="hero-bg-video"
+          src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_215831_c6a8989c-d716-4d8d-8745-e972a2eec711.mp4"
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0"
+        />
+      )}
 
       {/* SUBTLE OVERLAY FILTER (Allows perfect readability of all client elements) */}
-      <div className="absolute inset-0 bg-white/40 backdrop-blur-[0.5px] pointer-events-none z-0" />
+      {activeLink === 'Home' && (
+        <div className="absolute inset-0 bg-black/5 pointer-events-none z-0" />
+      )}
 
       {/* MAIN CONTAINER */}
       <div className="relative z-10 flex flex-col min-h-screen justify-between">
@@ -574,7 +619,7 @@ export default function App() {
         {/* 1. HOMEPAGE HERO (VISUALLY IDENTICAL EXCEPT APPROVED CODES) */}
         {activeLink === 'Home' && (
           <main className="flex-1 flex items-end pb-10 sm:pb-16 lg:pb-20 px-6 sm:px-12 md:px-20 lg:px-28 animate-up">
-            <div className="max-w-xs flex flex-col items-start text-left bg-white/80 backdrop-blur-md p-6 rounded-2xl border border-white/40 shadow-xl shadow-black/5">
+            <div className="max-w-sm md:max-w-md flex flex-col items-start text-left bg-transparent p-0 border-none shadow-none">
               
               {/* 1. Badge link */}
               <a
@@ -584,7 +629,7 @@ export default function App() {
                   e.preventDefault();
                   showToast('The Future of AR Learning has arrived.', 'info');
                 }}
-                className="inline-flex items-center gap-1.5 text-[11.5px] font-medium text-blue-500 hover:text-blue-600 transition-colors mb-3 group cursor-pointer"
+                className="inline-flex items-center gap-1.5 text-[11.5px] font-bold text-blue-600 hover:text-blue-700 transition-colors mb-3 group cursor-pointer"
               >
                 Seen on Shark Tank in India
                 <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5">
@@ -593,12 +638,12 @@ export default function App() {
               </a>
 
               {/* 2. Headline -> Completely replaces with requested text */}
-              <h1 id="hero-headline-h1" className="text-[1.5rem] sm:text-[1.75rem] leading-[1.15] font-medium text-gray-900 tracking-tight mb-3">
+              <h1 id="hero-headline-h1" className="text-3xl sm:text-4xl lg:text-5xl leading-tight font-extrabold text-slate-950 tracking-tight mb-4">
                 The Future of Learning Starts Here.
               </h1>
 
               {/* 3. Subtext -> Completely replaces with requested text */}
-              <p id="hero-subtext-p" className="text-[13px] text-gray-700 font-normal mb-3 leading-relaxed">
+              <p id="hero-subtext-p" className="text-sm sm:text-base text-slate-800 font-medium mb-6 leading-relaxed max-w-sm sm:max-w-md">
                 Master labs with AI guidance, immersive AR experiences, and real-time feedback that helps you learn by doing.
               </p>
 
@@ -608,7 +653,7 @@ export default function App() {
                 onClick={() => {
                   setIsTrialModalOpen(true);
                 }}
-                className="inline-flex items-center gap-2 text-[13px] font-medium text-blue-500 border border-blue-400 rounded-full px-5 py-2.5 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-all duration-200 group cursor-pointer shadow-sm active:scale-95 bg-transparent"
+                className="inline-flex items-center gap-2.5 text-[13.5px] font-bold text-blue-600 border-2 border-blue-600 rounded-full px-6 py-3 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-200 group cursor-pointer shadow-md active:scale-95 bg-transparent"
               >
                 Start Free Trial
                 <span className="inline-block transition-transform duration-205 group-hover:translate-x-0.5">
@@ -623,7 +668,7 @@ export default function App() {
         {/* 2. DOWNLOAD PAGE */}
         {activeLink === 'Download' && (
           <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-8 py-8 md:py-16 overflow-y-auto animate-up">
-            <div className="bg-white/80 backdrop-blur-md rounded-2xl border border-white p-6 sm:p-10 shadow-xl max-w-4xl mx-auto">
+            <div className="bg-white rounded-2xl border border-slate-100 p-6 sm:p-10 shadow-xl max-w-4xl mx-auto">
               <div className="flex items-center gap-2.5 mb-2">
                 <DownloadIcon className="text-blue-600 w-5 h-5 animate-bounce" />
                 <span className="text-[11px] font-bold text-blue-600 uppercase tracking-widest font-mono">Distribution Hub</span>
@@ -802,7 +847,7 @@ export default function App() {
           <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-8 py-8 md:py-12 overflow-y-auto animate-up text-left">
             
             {/* Header info bar */}
-            <div className="p-5 sm:p-6 rounded-2xl bg-white/80 backdrop-blur-md border border-white mb-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="p-5 sm:p-6 rounded-2xl bg-white border border-slate-100 mb-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div>
                 <span className="bg-emerald-50 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded border border-emerald-250 uppercase tracking-widest font-mono inline-block">
                   ALTAR Storefront
@@ -870,7 +915,7 @@ export default function App() {
             {/* ==========================================
                 SHOWCASE ALTAR FEATURES SECTION
                ========================================== */}
-            <div className="bg-white/85 backdrop-blur-md rounded-2xl border border-white p-6 sm:p-8 shadow-md">
+            <div className="bg-white rounded-2xl border border-slate-100 p-6 sm:p-8 shadow-md">
               <span className="bg-blue-50 text-blue-700 text-[10px] font-extrabold px-2 py-0.5 rounded border border-blue-250 uppercase tracking-widest font-mono">
                 Integrated Learning Tech
               </span>
@@ -901,7 +946,7 @@ export default function App() {
         {/* 4. HELP PAGE */}
         {activeLink === 'Help' && (
           <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-8 py-8 md:py-16 overflow-y-auto animate-up text-left">
-            <div id="help-content-container" className="grid grid-cols-1 lg:grid-cols-12 gap-8 bg-white/80 backdrop-blur-md rounded-2xl border border-white p-6 sm:p-8 shadow-xl">
+            <div id="help-content-container" className="grid grid-cols-1 lg:grid-cols-12 gap-8 bg-white rounded-2xl border border-slate-100 p-6 sm:p-8 shadow-xl">
               
               {/* Left sidebar nav */}
               <div className="lg:col-span-4 space-y-4">
@@ -1077,7 +1122,7 @@ export default function App() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               
               {/* Left Contact Form */}
-              <div className="lg:col-span-7 bg-white/80 backdrop-blur-md rounded-2xl border border-white p-6 sm:p-8 shadow-xl">
+              <div className="lg:col-span-7 bg-white rounded-2xl border border-slate-100 p-6 sm:p-8 shadow-xl">
                 <div className="flex items-center gap-2 mb-2">
                   <MessageSquare className="text-blue-600 w-5 h-5" />
                   <span className="text-[11px] font-bold text-blue-600 uppercase tracking-widest font-mono">Incident Dispatch</span>
@@ -1176,7 +1221,7 @@ export default function App() {
               <div className="lg:col-span-5 space-y-6">
                 
                 {/* Accordion FAQ block */}
-                <div className="bg-white/80 backdrop-blur-md rounded-2xl border border-white p-5 sm:p-6 shadow-xl space-y-4">
+                <div className="bg-white rounded-2xl border border-slate-100 p-5 sm:p-6 shadow-xl space-y-4">
                   <h3 className="font-extrabold text-slate-900 text-sm">Pre-Resolved FAQ's</h3>
                   <div className="space-y-2">
                     {faqs.map((faq, i) => (
@@ -1244,7 +1289,7 @@ export default function App() {
         {toasts.map(t => (
           <div
             key={t.id}
-            className={`pointer-events-auto flex items-center gap-2 p-3.5 rounded-xl shadow-xl text-xs font-semibold text-slate-800 bg-white/95 backdrop-blur-md border border-slate-200 animate-slide-in-right justify-between`}
+            className={`pointer-events-auto flex items-center gap-2 p-3.5 rounded-xl shadow-xl text-xs font-semibold text-slate-800 bg-white border border-slate-200 animate-slide-in-right justify-between`}
           >
             <div className="flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-blue-500 shrink-0" />
@@ -1265,7 +1310,7 @@ export default function App() {
        // ==========================================
       }
       {isTrialModalOpen && (
-        <div id="trial-modal-overlay" className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div id="trial-modal-overlay" className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl max-w-sm w-full p-6 border border-slate-200/50 shadow-2xl relative animate-up max-h-[90vh] overflow-y-auto text-slate-800">
             
             <button
@@ -1394,7 +1439,7 @@ export default function App() {
        // ==========================================
       }
       {isCartOpen && (
-        <div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex justify-end">
+        <div className="fixed inset-0 bg-black/40 z-50 flex justify-end">
           <div className="bg-white w-full max-w-md h-full p-6 shadow-2xl flex flex-col justify-between relative animate-slide-in-right text-slate-801">
             
             <button
