@@ -1,5 +1,5 @@
 {
-  "name": "ALTAR Immersive Labs",
+  "name": "ALTAR",
   "description": "An immersive, next-generation science laboratory learning platform with interactive physics engines, chemistry experiments, and AI virtual guidance.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
